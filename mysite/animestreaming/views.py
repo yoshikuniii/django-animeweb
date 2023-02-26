@@ -10,13 +10,11 @@ pynime = PyNime()
 # Create your views here.
 def index(request):
     anime_data_list = pynime.get_recent_release()
-    # anime_data_list = []
     context = {'anime_data_list': anime_data_list}
     return render(request, 'animestreaming/index.html', context)
 
 def watch(request, anime_title: str, episode: int, video_res: int):
     stream_url = pynime.grab_stream(anime_title=anime_title, episode=episode, resolution=video_res)
-    # stream_url = "https://tnc-11.abecdn.com/1ab5d45273a9183bebb58eb74d5722d8ea6384f350caf008f08cf018f1f0566d0cb82a2a799830d1af97cd3f4b6a9a81ef3aed2fb783292b1abcf1b8560a1d1aa308008b88420298522a9f761e5aa1024fbe74e5aa853cfc933cd1219327d1232e91847a185021b184c027f97ae732b3708ee6beb80ba5db6628ced43f1196fe/d0a7559869d315c5498ebe1e346aae43/ep.1.1665240453.720.m3u8"
     context = {
         'anime_title': anime_title,
         'episode': episode,
@@ -33,3 +31,21 @@ def search_anime(request):
             return render(request, 'animestreaming/search.html', {'search_result': search_result})
 
     return render(request, 'animestreaming/search.html', {'search_result': []})
+
+def details(request, anime_title: str):
+    anime_data = pynime.search_anime(anime_title)
+    anime_details = pynime.get_anime_details(anime_data[0].category_url)
+    
+    get_episodes = pynime.get_episode_urls(anime_data[0].category_url)
+
+    context = {
+        'anime_title': anime_details.title,
+        'anime_synopsis': anime_details.synopsis,
+        'anime_picture_url': anime_details.image_url,
+        'anime_genres': ", ".join(str(genre) for genre in anime_details.genres),
+        'anime_status': anime_details.status,
+        'anime_season': anime_details.season,
+        'total_episode': len(get_episodes),
+        'list_episodes': get_episodes,
+    }
+    return render(request, 'animestreaming/details.html', context)

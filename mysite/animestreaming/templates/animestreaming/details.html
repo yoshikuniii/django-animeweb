@@ -16,6 +16,7 @@
   </head>
 
   <body>
+    
 
     <header>
       <div class="navbar navbar-dark bg-dark box-shadow">
@@ -33,39 +34,34 @@
     <main role="main">
       <div class="album py-5 bg-light">
         <div class="container">
-
+          
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-              <!-- <li class="breadcrumb-item active"><a href="#">Recent Release</a></li> -->
+              <li class="breadcrumb-item"><a href="/">Home</a></li>
               <!-- <li class="breadcrumb-item active" aria-current="page">Recent Release</li> -->
-              <li class="breadcrumb-item">Home: Recent Release</li>
+              <li class="breadcrumb-item">{{ anime_title }}</li>
             </ol>
           </nav>
-  	      <div class="row">
-  	      	{% if anime_data_list %}
-  	        	{% for anime in anime_data_list %}
-  	        		<div class="col-md-3">
-                  <div class="card-deck">
-                    <div class="card mb-4">
-                      <a href="watch/{{anime.title}}/{{anime.latest_episode}}/720" target="_blank">
-                        <img class="card-img-top" src="{{ anime.picture_url }}">
-                      </a>
-                      <div class="card-body">
-                        <a href="watch/{{anime.title}}/{{anime.latest_episode}}/720" target="_blank">
-                          <h5 class="card-title">{{ anime.title }}</h5>
-                        </a>
-                        <p class="card-text"></p>
-                      </div>
-                      <div class="card-footer">
-                        <small class="text-muted">Latest Episode {{ anime.latest_episode }}</small>
-                      </div>
+
+  	      <div class="media">
+            <img class="align-self-start mr-3" src="{{ anime_picture_url }}" alt="Generic placeholder image">
+            <div class="media-body">
+              <h5 class="mt-0">{{ anime_title }}</h5>
+              <p>{{ anime_synopsis }}</p>
+              <p class="mb-0">Genre : {{ anime_genres }}</p>
+              <p class="mb-0">Year : {{ anime_season }}</p>
+              <p class="mb-0">Status : {{ anime_status }}</p>
+              <p class="mb-0">Total Episode : {{ total_episode }}</p>
+              <div class="btn-toolbar form-group mt-3">
+                {% for url in list_episodes %}
+                  <div class="row mt-1">
+                    <div class="col mr-1">
+                      <a class="btn btn-sm btn-primary" href="/watch/{{ anime_title }}/{{ forloop.counter }}/720" target="_blank">Watch Episode {{ forloop.counter }}</a>
                     </div>
                   </div>
-  			        </div>
-              {% endfor %}
-            {% else %}
-  				    <p>such empty.
-  			    {% endif %}
+                {% endfor %}
+              </div>
+            </div>
           </div>
         </div>
       </div>

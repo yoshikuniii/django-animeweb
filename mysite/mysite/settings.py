@@ -24,14 +24,16 @@ SECRET_KEY = 'django-insecure-2**u1b1o_h=h244czit=-d6q+pf)9#o0c-sk(-knrisg@#z80m
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+# DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.1.9']
 
 
 # Application definition
 
 INSTALLED_APPS = [
     'animestreaming.apps.AnimestreamingConfig',
+    'animestreaming.templatetags',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
