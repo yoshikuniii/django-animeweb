@@ -7,7 +7,7 @@
     <meta name="author" content="">
     <link rel="icon" href="">
 
-    <title>Album</title>
+    <title>Search for : {{ search_query }}</title>
 
     <link rel="canonical" href="">
 
@@ -36,9 +36,9 @@
 
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-              <!-- <li class="breadcrumb-item active"><a href="#">Recent Release</a></li> -->
+              <li class="breadcrumb-item"><a href="/">Home</a></li>
               <!-- <li class="breadcrumb-item active" aria-current="page">Recent Release</li> -->
-              <li class="breadcrumb-item">Home: Search</li>
+              <li class="breadcrumb-item active">Search for <b>{{ search_query }}</b></li>
             </ol>
           </nav>
 
@@ -47,11 +47,13 @@
   	        	{% for anime in search_result %}
   	        		<div class="col-md-2">
   			          <div class="card mb-4 box-shadow">
-  			            <a href="details/{{anime.title}}" target="_blank">
+  			            <a href="details/{{ anime.category_url }}" target="_blank">
                       <img class="card-img-top" src="{{ anime.picture_url }}">
                     </a>
   			            <div class="card-body">
-  			              <p class="card-text">{{ anime.title }}</p>
+  			              <a href="details/{{ anime.category_url }}" target="_blank">
+                        <h5 class="card-title">{{ anime.title }}</h5>
+                      </a>
   			            </div>
   			          </div>
   			        </div>

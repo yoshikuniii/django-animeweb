@@ -7,7 +7,7 @@
     <meta name="author" content="">
     <link rel="icon" href="">
 
-    <title>Album</title>
+    <title>Home</title>
 
     <link rel="canonical" href="">
 
@@ -38,26 +38,26 @@
             <ol class="breadcrumb">
               <!-- <li class="breadcrumb-item active"><a href="#">Recent Release</a></li> -->
               <!-- <li class="breadcrumb-item active" aria-current="page">Recent Release</li> -->
-              <li class="breadcrumb-item">Home: Recent Release</li>
+              <li class="breadcrumb-item">Home : Recent Release</li>
             </ol>
           </nav>
   	      <div class="row">
   	      	{% if anime_data_list %}
   	        	{% for anime in anime_data_list %}
-  	        		<div class="col-md-3">
+  	        		<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                   <div class="card-deck">
                     <div class="card mb-4">
-                      <a href="watch/{{anime.title}}/{{anime.latest_episode}}/720" target="_blank">
+                      <a href="watch{{anime.latest_episode_url}}/720" target="_blank">
                         <img class="card-img-top" src="{{ anime.picture_url }}">
                       </a>
                       <div class="card-body">
-                        <a href="watch/{{anime.title}}/{{anime.latest_episode}}/720" target="_blank">
+                        <a href="watch{{anime.latest_episode_url}}/720" target="_blank">
                           <h5 class="card-title">{{ anime.title }}</h5>
                         </a>
                         <p class="card-text"></p>
                       </div>
                       <div class="card-footer">
-                        <small class="text-muted">Latest Episode {{ anime.latest_episode }}</small>
+                        <small class="text-muted">Latest Episode {{ anime.latest_episode_int }}</small>
                       </div>
                     </div>
                   </div>
