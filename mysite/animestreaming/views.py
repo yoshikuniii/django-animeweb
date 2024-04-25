@@ -21,6 +21,7 @@ class AnimeData:
 def index(request):
     anime_data_list = list()
     recent_anime = pynime.get_recent_release()
+
     for i in recent_anime:
         anime_data_list.append(
             AnimeData(
