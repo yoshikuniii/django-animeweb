@@ -1,87 +1,45 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="">
+{% extends 'base.html' %}
 
-    <title>{{ anime_title }}</title>
+{% block title %}
+<title>PyNime - Home</title>
+{% endblock %}
 
-    <link rel="canonical" href="">
+{% block main_body %}
+<main>
+  <div class="album py-5 bg-body-tertiary">
+    <div class="container">
 
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-  </head>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/">Home</a></li>
+          <li class="breadcrumb-item">{{ anime_title }}</li>
+        </ol>
+      </nav>
 
-  <body>
-    
+      <div class="media">
+        <img class="align-self-start mr-3" src="{{ anime_picture_url }}" alt="Generic placeholder image">
+        <div class="media-body">
+          <h5 class="mt-0">{{ anime_title }}</h5>
+          <p>{{ anime_synopsis }}</p>
+          <p class="mb-0">Genre : {{ anime_genres }}</p>
+          <p class="mb-0">Year : {{ anime_season }}</p>
+          <p class="mb-0">Status : {{ anime_status }}</p>
+          <p class="mb-0">Total Episode : {{ total_episode }}</p>
 
-    <header>
-      <div class="navbar navbar-dark bg-dark box-shadow">
-        <nav class="container d-flex justify-content-between">
-          <a class="navbar-brand" href="/">Home</a>
-          <form class="form-inline" action="/search" method="post">
-            {% csrf_token %}
-            <input id="search_query" name="search_query" class="form-control mr-sm-2" type="text" placeholder="Search Anime" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-          </form>
-        </nav>
-      </div>
-    </header>
-
-    <main role="main">
-      <div class="album py-5 bg-light">
-        <div class="container">
-          
-          <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="/">Home</a></li>
-              <!-- <li class="breadcrumb-item active" aria-current="page">Recent Release</li> -->
-              <li class="breadcrumb-item">{{ anime_title }}</li>
-            </ol>
-          </nav>
-
-  	      <div class="media">
-            <img class="align-self-start mr-3" src="{{ anime_picture_url }}" alt="Generic placeholder image">
-            <div class="media-body">
-              <h5 class="mt-0">{{ anime_title }}</h5>
-              <p>{{ anime_synopsis }}</p>
-              <p class="mb-0">Genre : {{ anime_genres }}</p>
-              <p class="mb-0">Year : {{ anime_season }}</p>
-              <p class="mb-0">Status : {{ anime_status }}</p>
-              <p class="mb-0">Total Episode : {{ total_episode }}</p>
-              <div class="btn-toolbar form-group mt-3">
-                {% for url in list_episodes %}
-                  <div class="row mt-1">
-                    <div class="col mr-1">
-                      <a class="btn btn-sm btn-primary" href="/watch/{{ anime_watch_url }}-episode-{{ forloop.counter }}/720" target="_blank">Watch Episode {{ forloop.counter }}</a>
-                    </div>
-                  </div>
-                {% endfor %}
+          <div class="btn-toolbar form-group mt-3">
+            {% for url in list_episodes %}
+              <div class="row mt-1">
+                <div class="col mr-1">
+                  <a class="btn btn-sm btn-primary" href="/watch/{{ anime_watch_url }}-episode-{{ forloop.counter }}/720" target="_blank">Watch Episode {{ forloop.counter }}</a>
+                </div>
               </div>
-            </div>
+            {% endfor %}
           </div>
+
         </div>
       </div>
-    </main>
 
-    <footer class="text-muted">
-      <div class="container">
-        <p class="float-right">
-          <a href="#">Back to top</a>
-        </p>
-        <p>Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
-        <p>New to Bootstrap? <a href="../../">Visit the homepage</a> or read our <a href="../../getting-started/">getting started guide</a>.</p>
-      </div>
-    </footer>
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  </body>
-</html>
+    </div>
+  </div>
+</main>
+{% endblock %}

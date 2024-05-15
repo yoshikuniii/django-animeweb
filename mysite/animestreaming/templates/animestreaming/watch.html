@@ -5,32 +5,35 @@
 {% endblock %}
 
 {% block main_body %}
-    <main>
-      </div>
-      <div class="album py-5 bg-body-tertiary">
-        <div class="container">
-          <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="/">Home</a></li>
-              <li class="breadcrumb-item">Now Watching : {{ anime_title }} Episode {{ episode }}</li>
-            </ol>
-          </nav>
-          
-          <div class="embed-responsive embed-responsive-16by9">
-            <video-js id="video-player" class="embed-responsive-item" controls preload="auto" width="640" height="268" poster="http://video-js.zencoder.com/oceans-clip.jpg">
-              <source src="{{ video_source }}" type="application/x-mpegURL">
-           </video-js>
-           <!-- video.js css -->
-           <link href="https://unpkg.com/video.js/dist/video-js.css" rel="stylesheet">
-           <!--This is for Video.js by itself -->
-           <script src="https://unpkg.com/video.js/dist/video.js"></script>
-           <!--This is for HLS compatibility with all major browsers-->
-           <script src = "https://unpkg.com/browse/@videojs/http-streaming@1.13.3/dist/videojs-http-streaming.min.js"></script>
-           <script>
-            var player = videojs('video-player');
-           </script>
-          </div>
+  <main>
+    <div class="album py-5 bg-body-tertiary">
+      <div class="container">
+
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item">Now Watching : {{ anime_title }} Episode {{ episode }}</li>
+          </ol>
+        </nav>
+        
+        <div class="embed-responsive embed-responsive-16by9">
+          <video-js id="video-player" class="video-js vjs-layout-tiny" controls preload="auto" data-setup='{ "fluid" : true }'>
+            <source src="{{ video_source }}" type="application/x-mpegURL">
+          </video-js>
+          {% load static %}
+          <!-- video.js css -->
+          <link href="{% static 'animestreaming/assets/videojs/video-js.css' %}" rel="stylesheet">
+          <!--This is for Video.js by itself -->
+          <script src="{% static 'animestreaming/assets/videojs/video.js' %}"></script>
+          <!--This is for HLS compatibility with all major browsers-->
+          <!-- <script src = "https://unpkg.com/browse/@videojs/http-streaming@1.13.3/dist/videojs-http-streaming.min.js"></script> -->
+          <script>
+          var player = videojs('video-player');
+          player.responsive(true);
+          </script>
         </div>
+        
       </div>
-    </main>
+    </div>
+  </main>
 {% endblock %}
