@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-<title>PyNime - Home</title>
+<title>PyNime - {{ anime_title }}</title>
 {% endblock %}
 
 {% block main_body %}
@@ -16,29 +16,32 @@
         </ol>
       </nav>
 
-      <div class="media">
-        <img class="align-self-start mr-3" src="{{ anime_picture_url }}" alt="Generic placeholder image">
-        <div class="media-body">
-          <h5 class="mt-0">{{ anime_title }}</h5>
+      <div class="row">
+        <div class="col-3">
+          <img class="img-fluid rounded" src="{{ anime_picture_url }}" alt="{{ anime_title }}">
+        </div>
+
+        <div class="col">
+          <h3 class="display-3">{{ anime_title }}</h5>
           <p>{{ anime_synopsis }}</p>
           <p class="mb-0">Genre : {{ anime_genres }}</p>
           <p class="mb-0">Year : {{ anime_season }}</p>
           <p class="mb-0">Status : {{ anime_status }}</p>
           <p class="mb-0">Total Episode : {{ total_episode }}</p>
-
-          <div class="btn-toolbar form-group mt-3">
-            {% for url in list_episodes %}
-              <div class="row mt-1">
-                <div class="col mr-1">
-                  <a class="btn btn-sm btn-primary" href="/watch/{{ anime_watch_url }}-episode-{{ forloop.counter }}/720" target="_blank">Watch Episode {{ forloop.counter }}</a>
-                </div>
-              </div>
-            {% endfor %}
+          <br>
+          <div class="btn-group">
+            <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+              Select Episode
+            </button>
+            
+            <ul class="dropdown-menu">
+              {% for url in list_episodes %}
+                <li><a class="dropdown-item" href="/watch/{{ anime_watch_url }}-episode-{{ forloop.counter }}/720" target="_blank">Watch Episode {{ forloop.counter }}</li>
+              {% endfor %}    
+            </ul>
           </div>
-
         </div>
       </div>
-
     </div>
   </div>
 </main>
