@@ -13,10 +13,6 @@
         <p class="lead text-body-secondary">
           Stream anime for free without any distraction of ads!
         </p>
-        <!-- <p>
-          <a href="#" class="btn btn-primary my-2">Button A</a>
-          <a href="#" class="btn btn-secondary my-2">Button B</a>
-        </p> -->
       </div>
     </div>
   </section>
@@ -29,8 +25,8 @@
           {% for anime in anime_data_list %}
             <div class="col-6">
               <div class="card shadow-sm h-100">
-                <a href="watch{{anime.latest_episode_url}}/720" target="_blank">
-                  <img class="bd-placeholder-img card-img-top" src="{{ anime.picture_url }}" width="30%" height="100%" role="img" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <a href="watch{{anime.latest_episode_url}}/720">
+                  <img class="bd-placeholder-img card-img-top img-fluid" src="{{ anime.picture_url }}" width="30%" height="100%" role="img" preserveAspectRatio="xMidYMid slice" focusable="false">
                 </a>
                 <div class="card-body">
                   <p class="card-text">{{ anime.title }}</p>

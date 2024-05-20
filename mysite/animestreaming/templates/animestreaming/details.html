@@ -28,18 +28,23 @@
           <p class="mb-0">Year : {{ anime_season }}</p>
           <p class="mb-0">Status : {{ anime_status }}</p>
           <p class="mb-0">Total Episode : {{ total_episode }}</p>
+          
           <br>
-          <div class="btn-group">
-            <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-              Select Episode
-            </button>
-            
-            <ul class="dropdown-menu">
-              {% for url in list_episodes %}
-                <li><a class="dropdown-item" href="/watch/{{ anime_watch_url }}-episode-{{ forloop.counter }}/720" target="_blank">Watch Episode {{ forloop.counter }}</li>
-              {% endfor %}    
-            </ul>
+          
+          <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseEpisode" role="button" aria-expanded="false" aria-controls="collapseEpisode">
+            Show Episode(s)
+          </a>
+          <p>
+          <div class="collapse" id="collapseEpisode">
+            <div class="card card-body">
+              <ul class="list-group list-group-flush">
+                {% for url in list_episodes %}
+                  <li class="list-group-item"><a href="/watch/{{ anime_watch_url }}-episode-{{ forloop.counter }}/720" target="_blank">Watch Episode {{ forloop.counter }}</li>
+                {% endfor %}    
+              </ul>
+            </div>
           </div>
+          </p>
         </div>
       </div>
     </div>

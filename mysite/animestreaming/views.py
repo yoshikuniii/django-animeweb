@@ -1,6 +1,5 @@
-from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse, Http404, HttpResponseRedirect
-from django.urls import reverse
+from django.shortcuts import render
+
 
 from .forms import AnimeSearch
 
@@ -37,7 +36,7 @@ def index(request):
     }
     return render(request, 'animestreaming/index.html', context)
 
-def watch(request, anime_episode_url: str, video_res: int):
+async def watch(request, anime_episode_url: str, video_res: int):
     stream_url = pynime.get_stream_urls(f"{pynime.baseURL}/{anime_episode_url}")[str(video_res)]
     episode = re.findall(r"episode-(\d+)", anime_episode_url)[0]
     anime_title = pynime.search_anime(
@@ -76,8 +75,8 @@ def search_anime(request):
     return render(request, 'animestreaming/search.html', {'search_result': []})
 
 def details(request, anime_category_url: str):
-    anime_details = pynime.get_anime_details(f"{pynime.baseURL}/category/{anime_category_url}")
-    get_episodes = pynime.get_episode_urls(f"{pynime.baseURL}/category/{anime_category_url}")
+    anime_details = (pynime.get_anime_details(f"{pynime.baseURL}/category/{anime_category_url}"))
+    get_episodes = (pynime.get_episode_urls(f"{pynime.baseURL}/category/{anime_category_url}"))
 
     context = {
         'anime_watch_url': anime_category_url,
